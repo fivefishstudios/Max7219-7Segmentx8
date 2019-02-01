@@ -15,6 +15,9 @@
 
 int ctr;
 
+int d = 30;  // animation delay
+
+
 //  * Pin 12 is connected to the DATA IN-pin of the first MAX7221
 //  * Pin 11 is connected to the CLK-pin of the first MAX7221
 //  * Pin 10 is connected to the LOAD(/CS)-pin of the first MAX7221
@@ -113,6 +116,81 @@ void printNumber (int v) {
     lc.setDigit(0, 0, (byte)d1, false); 
 } 
 
+
+void snake1(){
+
+  // right to left (top line)
+  for (int i=0; i<8; i++){
+    lc.setRow(0, i, 64);
+    delay(d);
+  }
+  lc.setRow(0, 7, 66);
+  delay(d);
+  // draw middle lines
+  lc.setRow(0, 7, 67);
+  delay(d);
+
+  // draw middle lines, left to right
+  for (int i=6; i>=0; i--){
+    lc.setRow(0, i, 65);
+    delay(d);
+  }
+
+  // 1st col
+  lc.setRow(0, 0, 81);
+  delay(d);
+  lc.setRow(0, 0, 89);
+  delay(d);
+
+  // bottom row, right to left
+  for (int i=1; i<7; i++){
+    lc.setRow(0, i, 73);
+    delay(d);
+  }
+
+  // last digit
+  lc.setRow(0, 7, 75);
+  delay(d);
+
+  // start of 
+  // draw disappearing tails
+  lc.setRow(0, 0, 25);
+  delay(d);
+
+  for (int i=1; i<7; i++){
+    lc.setRow(0, i, 9);
+    delay(d);
+  }
+
+  // draw 7th digit
+  lc.setRow(0, 7, 11);
+  delay(d);
+  lc.setRow(0, 7, 9);
+  delay(d);
+  lc.setRow(0, 7, 8);
+  delay(d);
+
+  // draw tail left to right
+  for (int i=6; i>=1; i--){
+      lc.setRow(0, i, 8);
+      delay(d);
+  }
+
+  // draw 1st digit 
+  lc.setRow(0, 0, 24);
+  delay(d);
+  lc.setRow(0, 0, 8);
+  delay(d);
+  lc.setRow(0, 0, 0);
+  delay(d);
+  
+  // draw tail, right to left lower line
+  for (int i=1; i<8; i++){
+    lc.setRow(0, i, 0);
+    delay(d);
+  }
+}
+
 void setup()
 {
   #if LED_HEARTBEAT
@@ -147,7 +225,23 @@ void loop()
   #endif
 
   // increment, and print
-  ctr++; 
-  printNumber(ctr); 
+  // ctr++; 
+  // printNumber(ctr); 
+
+  // lc.setRow(0, 0, 0b00000001);
+  // lc.setRow(0, 1, 0b00000010);
+  // lc.setRow(0, 2, 0b00000100);
+  // lc.setRow(0, 3, 0b00001000);
+  // lc.setRow(0, 4, 0b00010000);
+  // lc.setRow(0, 5, 0b00100000);
+  // lc.setRow(0, 6, 0b01000000);
+  // lc.setRow(0, 7, 0b10000000);
+
+  snake1();
+
+  // clear all 
+  for (int i=0; i<8; i++){
+    lc.setRow(0, i, 0);
+  }
 
 }
