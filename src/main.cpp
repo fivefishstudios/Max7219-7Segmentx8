@@ -65,10 +65,10 @@ void origprintNumber(int v) {
 void printNumber (int v) {  
     int d1; // ones  
     int d2; // tens
-    int d3; // thundreds
-    int d4; // ten thousands; 
-    int d5;
-    int d6;
+    int d3; // hundreds
+    int d4; // thousands; 
+    int d5; // ten-thousands
+    int d6; // hundred-thousands
     int d7;
     int d8;
 
@@ -121,7 +121,7 @@ void setup()
   #endif
 
   // switch to normal operation
-  for (int index=0; index<lc.getDeviceCount(); index++) {
+  for (int index=0; index < lc.getDeviceCount(); index++) {
     lc.shutdown(index,false); 
   } 
 
